@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div class="main">
+      <div class="container a-container" id="a-container">
+        <!-- <form class="form" id="a-form"(ngSubmit)="onSubmit()" method="post"> -->
+          <form class="form" id="a-form"(ngSubmit)="onSubmit(registerForm)" method="post" #registerForm ="ngForm">
+          <h2 class="form_title title">Ajouter un compte</h2>
+          <input class="form-control form__input" type="text" placeholder="Nom" [(ngModel)]="user.nom" name="nomVar" required minlength="4" #nomVar="ngModel" [ngClass]="{ 'is-invalid' : nomVar.touched && !nomVar.valid}">
+          <div class="invalid-feedback">
+            <span *ngIf="nomVar.errors?.['required']">
+              Enter votre nom
+            </span>
+          </div>
+          <div class="invalid-feedback">
+            <span *ngIf="nomVar.errors?.['minlength']">
+              Minimum 4 charactères
+            </span>
+          </div>
+          <input class="form-control form__input" type="text" placeholder="Prenom" [(ngModel)]="user.prenom" name="prenom" required minlength="4" #prenomVar="ngModel" [ngClass]="{ 'is-invalid' : prenomVar.touched && !prenomVar.valid}">
+          <div class="invalid-feedback">
+            <span *ngIf="prenomVar.errors?.['required']">
+              Enter votre prenom
+            </span>
+          </div>
+          <div class="invalid-feedback">
+            <span *ngIf="prenomVar.errors?.['minlength']">
+              Minimum 4 charactères
+            </span>
+          </div>
+          <input class="form-control form__input" type="text" placeholder="Adress" [(ngModel)]="user.address" name="address" required minlength="5" #adressVar="ngModel" [ngClass]="{ 'is-invalid' : adressVar.touched && !adressVar.valid}">
+          <div class="invalid-feedback">
+            <span *ngIf="adressVar.errors?.['required']">
+              Enter votre adress
+            </span>
+          </div>
+          <div class="invalid-feedback">
+            <span *ngIf="adressVar.errors?.['minlength']">
+              Minimum 5 charactères
+            </span>
+          </div>
+          <input class="form-control form__input" type="date" placeholder="Date de Naissance" [(ngModel)]="user.dateNaissance" name="dateNaissance" required #dateNaissanceVar="ngModel" [ngClass]="{ 'is-invalid' : dateNaissanceVar.touched && !dateNaissanceVar.valid}">
+          <div class="invalid-feedback">
+            <span *ngIf="dateNaissanceVar.errors?.['required']">
+              Enter votre date de naissance
+            </span>
+          </div>
+          <input class="form-control form__input" type="text" placeholder="Numero Telephone" [(ngModel)]="user.numeroTelephone" name="numeroTelephone" required minlength="10" #numTelephone="ngModel" [ngClass]="{ 'is-invalid' : numTelephone.touched && !numTelephone.valid}">
+          <div class="invalid-feedback">
+            <span *ngIf="numTelephone.errors?.['required']">
+              Enter votre numero de telephone
+            </span>
+          </div>
+          <div class="invalid-feedback">
+            <span *ngIf="numTelephone.errors?.['minlength']">
+              Minimum 10 charactères
+            </span>
+          </div>
+          <label>Roles</label>
+          <select class="form-control form__input" [(ngModel)]="user.role" name="role" id="role" required #roleVar="ngModel" [ngClass]="{ 'is-invalid' : roleVar.touched && !roleVar.valid}">
+            <option value="admin">Admin</option>
+            <option value="employer">Employer</option>
+          </select>
+          <div class="invalid-feedback">
+            <span *ngIf="roleVar.errors?.['required']">
+              Selectionner un role
+            </span>
+          </div>
+          <label>Departements</label>
+          <select class="form-control form__input"[(ngModel)]="user.departement.id" name="departement" id="departement" required #departementVar="ngModel" [ngClass]="{ 'is-invalid' : departementVar.touched && !departementVar.valid}">
+            <option *ngFor="let dept of departements" value="{{dept.id}}">{{dept.nomDepartement}}</option>
+          </select>
+          <div class="invalid-feedback">
+            <span *ngIf="departementVar.errors?.['required']">
+              Selectionner une departement
+            </span>
+          </div>
+          <input class="form-control form__input" type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required email #emailVar="ngModel" [ngClass]="{ 'is-invalid' : emailVar.touched && !emailVar.valid}">
+          <div class="invalid-feedback">
+            <span *ngIf="emailVar.errors?.['required']">
+              Enter votre Email
+            </span>
+          </div>
+          <div class="invalid-feedback">
+            <span *ngIf="emailVar.errors?.['email']">
+              email non valid
+            </span>
+          </div>
+          <input class="form-control form__input" type="password" placeholder="Password" [(ngModel)]="user.password" name="password" minlength="6" required minlength="4" #passwordVar="ngModel" [ngClass]="{ 'is-invalid' : passwordVar.touched && !passwordVar.valid}"><br>
+          <div class="invalid-feedback">
+            <span *ngIf="passwordVar.errors?.['required']">
+              Enter votre password
+            </span>
+          </div>
+          <div class="invalid-feedback">
+            <span *ngIf="passwordVar.errors?.['minlength']">
+              Minimum 6 charactères
+            </span>
+          </div>
+          <button  type="submit" mat-raised-button color="warn" class="submit">Ajouter</button>
+        </form>
+      </div>
+      <!-- <div class="switch" id="switch-cnt">
+        <div class="switch__circle"></div>
+        <div class="switch__container" id="switch-c1">
+          <h2 class="switch__title title">Content de te revoir !</h2>
+          <p class="switch__description description">Pour rester en contact, veuillez vous connecter avec vos informations personnelles</p>
+          <button mat-raised-button color="warn" routerLink="/signIn" >S'identifier</button>
+        </div>
+      </div> -->
+    </div>
+  </body>
+</html>

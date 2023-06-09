@@ -1,0 +1,195 @@
+<div class="row">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Gestion</a></li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Reclamation</li>
+    </ol>
+    <h2 class="font-weight-bolder mb-0">Reclamation</h2>
+  </nav>
+</div>
+<div class="row mt-2">
+  <div class="col-12">
+    <div class="card mt-2">
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" #registerForm="ngForm" method="post">
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label>List Materiel :</label>
+              <select class="form-control form__input" [(ngModel)]="materiel" name="idMateriel" >
+                <option selected></option>
+                <option *ngFor="let mat of materiels" value="{{mat.id}}">Nom: {{mat.nom}} // Marque: {{mat.marque}} // Numero de Serie: {{mat.numeroSerie}}</option>
+              </select>
+            </div>
+            <div class="mb-3 col-6">
+              <label>Date de reclamation :</label>
+              <input type="date" class="form-control" name="dateReclamtion" [(ngModel)]="dateReclamation" ng-model="dateR">
+            </div>
+            <div class="mb-3 col-6">
+              <label>Date de reparaton :</label>
+              <input type="date" class="form-control" name="dateReparation" [(ngModel)]="dateReparation" ng-model="dateR">
+            </div>
+            <div class="mb-3 col-6">
+              <label>Description du panne :</label>
+              <input type="text"  class="form-control" name="descriptionPanne"  [(ngModel)]="description" placeholder="Description du panne" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>List des Employes :</label>
+              <select #teams (change)="onSelected(teams.value)" [(ngModel)]="emplJS" name="idEmployer" class="form-control form__input">
+                <option selected></option>
+                <option *ngFor="let use of users" value="{{use.id}}">{{use.nom}} {{use.prenom}}</option>
+              </select>
+            </div>
+            <!-- <div class="mb-3 col-6" style="display:none;">
+              <input type="text" name="detaReparation" value="">
+              <input type="text" name="idUser" value="">
+              <input type="text" [(ngModel)]="status" name="status" value="Encours">
+            </div> -->
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-warning mt-4 mb-0">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-header pb-0">
+        <h2>Liste des reclamations</h2>
+      </div>
+      <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+            <tr>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder jus ">Id</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Status</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Date de Reclamation</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Date de Reparation</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Description du Panne</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Materiel</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Employer</th>
+
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Modifier</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let myR of RecArr">
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <p>{{myR.id}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <p>{{myR.status}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <p>{{myR.date_reclamation}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <p>{{myR.date_reparation}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <p>{{myR.description}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <p>{{myR.materiel.marque}} // {{myR.materiel.nom}} // {{myR.materiel.num_serie}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div class="d-flex flex-column justify-content-center">
+                      <p>{{myR.user.nom}} // {{myR.user.prenom}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <button type="button" (click)="btnModifier(myR.id-1)" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
+                  <input style="display:none;" type="text" value="{{myR.id-1}}" [(ngModel)]="idMP">
+                </td>
+                <td>
+                  <button mat-raised-button color="warn" (click)="deleteReclamation(myR.id)" class="btn btn-warning btn-sm">Supprimer</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Modifier reclamation</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label>List Materiel :</label>
+              <select class="form-control form__input" [(ngModel)]="materiel" name="idMateriel" >
+                <option selected></option>
+                <option *ngFor="let mat of materiels" value="{{mat.id}}">Nom: {{mat.nom}} // Marque: {{mat.marque}} // Numero de Serie: {{mat.numeroSerie}}</option>
+              </select>
+            </div>
+            <div class="mb-3 col-6">
+              <label>Date de reclamation :</label>
+              <input type="date" class="form-control" name="dateReclamtion" [(ngModel)]="dateReclamation" ng-model="dateR">
+            </div>
+            <div class="mb-3 col-6">
+              <label>Date de reparaton :</label>
+              <input type="date" class="form-control" name="dateReparation" [(ngModel)]="dateReparation" ng-model="dateR">
+            </div>
+            <div class="mb-3 col-12">
+              <label>Description du panne :</label>
+              <input type="text"  class="form-control" name="descriptionPanne"  [(ngModel)]="description" placeholder="Description du panne" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>List des Employes :</label>
+              <select #teams (change)="onSelected(teams.value)" [(ngModel)]="emplJS" name="idEmployer" class="form-control form__input">
+                <option selected></option>
+                <option *ngFor="let use of users" value="{{use.id}}">{{use.nom}} {{use.prenom}}</option>
+              </select>
+            </div>
+            <!-- <div class="mb-3 col-6" style="display:none;">
+              <input type="text" name="detaReparation" value="">
+              <input type="text" name="idUser" value="">
+              <input type="text" name="status" value="Encours">
+            </div> -->
+          <button type="button" (click)="updateReclamation()" class="btn btn-success" data-bs-dismiss="modal">Modifier</button>
+          <button type="button" (click)="refresh()" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

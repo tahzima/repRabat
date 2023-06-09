@@ -1,0 +1,20 @@
+<mat-toolbar color="warn" class="mat-elevation-z8">
+  <span routerLink=""><mat-icon>eco</mat-icon>Marsa Maroc</span>
+  <div class="spacer"></div>
+  <button mat-button routerLink="">Home</button>
+  <button mat-button routerLink="departement">Departement</button>
+  <button mat-button routerLink="fournisseur">Fournisseurs</button>
+  <button mat-button routerLink="materiel">Materiaux</button>
+  <button mat-button routerLink="commande">Commandes</button>
+  <button mat-button routerLink="reclamation">Reclamation</button>
+  <button mat-button routerLink="contacter-nous">Contactez-nous</button>
+  <div class="spacer"></div>
+  <button *ngIf="visibilite else elseBlock" mat-raised-button color="warn" (click)="clearSession()">Deconnecter</button>
+  <!-- <button mat-raised-button color="warn" routerLink="">Deconnecter</button> -->
+  <ng-template #elseBlock>
+    <div class="spacer"></div>
+    <button mat-raised-button color="warn" routerLink="signIn">Identifier</button>
+    <div class="spacerPlus"></div>
+    <button mat-raised-button color="warn"  routerLink="signUp">Inscrire</button>
+  </ng-template>
+</mat-toolbar>

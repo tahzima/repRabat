@@ -1,0 +1,7 @@
+.spacer {
+  flex: 1 1 auto;
+}
+.spacerPlus {
+  display: flex;
+  justify-content:space-between;
+}

@@ -1,0 +1,99 @@
+<div class="row">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Gestion</a></li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Departement</li>
+    </ol>
+    <h2 class="font-weight-bolder mb-0">Departement</h2>
+  </nav>
+</div>
+<div class="row mt-2">
+  <div class="col-12">
+    <div class="card mt-2">
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" method="post">
+          <div class="row">
+            <div class="mb-3 col-12">
+              <label>Nom de Departement</label>
+              <input type="text" [(ngModel)]="departement.nomDepartement" class="form-control" name="nom" placeholder="Nom de Departement" aria-label="nomDepartement">
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-warning mt-4 mb-0">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-header pb-0">
+        <h2>Liste des departements</h2>
+      </div>
+      <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+            <tr>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder jus ">Id</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Nom</th>
+
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Modifier</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let dept of departements">
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <p>{{dept.id}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <p>{{dept.nomDepartement}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <button type="button" color="warn" (click)="btnModifier(dept.id)" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
+              </td>
+              <td>
+                <button mat-raised-button color="warn" (click)="deleteDepartement(dept.id)" class="btn bg-gradient-danger btn-sm">Supprimer</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Modifier Departement</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label>Nom de Departement</label>
+              <input type="text" [(ngModel)]="departementModifier.nomDepartement" class="form-control" name="nom" placeholder="Nom de Departement" >
+            </div>
+            <button type="button" (click)="updateDepartement()" class="btn btn-success" data-bs-dismiss="modal">Modifier</button>
+            <button type="button" (click)="refresh()" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

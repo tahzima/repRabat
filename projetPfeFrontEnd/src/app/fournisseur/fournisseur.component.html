@@ -1,0 +1,164 @@
+<div class="row">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+      <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Gestion</a></li>
+      <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Fournisseur</li>
+    </ol>
+    <h2 class="font-weight-bolder mb-0">Fournisseur</h2>
+  </nav>
+</div>
+<div class="row mt-2">
+  <div class="col-12">
+    <div class="card mt-2">
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" method="post">
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label>Nom du Fournisseur :</label>
+              <input type="text" [(ngModel)]="fournisseur.nom" class="form-control" name="nom" placeholder="Nom du Fournisseur" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>Prenom du Fournisseur :</label>
+              <input type="text" [(ngModel)]="fournisseur.prenom" class="form-control" name="prenom" placeholder="Prenom de Fournisseur" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>Nom de Societe :</label>
+              <input type="text" [(ngModel)]="fournisseur.nomSociete" class="form-control" name="nomSociete" placeholder="Nom de Societe" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>Numero de Telephone :</label>
+              <input type="text" [(ngModel)]="fournisseur.numeroTelephone" class="form-control" name="numeroTelephone" placeholder="Numero de Telephone" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>ICE :</label>
+              <input type="text" [(ngModel)]="fournisseur.ice" class="form-control" name="ice" placeholder="ICE" >
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-warning mt-4 mb-0">Ajouter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-header pb-0">
+        <h2>Liste des Fournisseurs</h2>
+      </div>
+      <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+            <tr>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder jus ">Id</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Nom</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Prenom</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Nom de Societe</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Numero de Telephone</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">ICE</th>
+
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Modifier</th>
+              <th class="text-uppercase text-gradient text-dark text-xs font-weight-bolder ps-2">Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let four of fournisseurs">
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <p>{{four.id}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <p>{{four.nom}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <p>{{four.prenom}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <p>{{four.nomSociete}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <p>{{four.numeroTelephone}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <p>{{four.ice}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <button type="button" (click)="btnModifier(four.id)" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
+              </td>
+              <td>
+                <button mat-raised-button color="warn" (click)="deleteFournisseur(four.id)" class="btn btn-warning btn-sm">Supprimer</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Modifier fournisseur</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label>Nom du fournisseur</label>
+              <input type="text" [(ngModel)]="fournisseurModifier.nom" class="form-control" name="nom" placeholder="Nom du fournisseur" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>Prenom du Fournisseur</label>
+              <input type="text" [(ngModel)]="fournisseurModifier.prenom" class="form-control" name="prenom" placeholder="Prenom du fournisseur" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>Nom de Societe</label>
+              <input type="text" [(ngModel)]="fournisseurModifier.nomSociete" class="form-control" name="nomSociete" placeholder="Nom de Societe" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>Numero deTelephone</label>
+              <input type="text" [(ngModel)]="fournisseurModifier.numeroTelephone" class="form-control" name="numeroTelephone" placeholder="Numero deTelephone" >
+            </div>
+            <div class="mb-3 col-6">
+              <label>ICE</label>
+              <input type="text" [(ngModel)]="fournisseurModifier.ice" class="form-control" name="ice" placeholder="ICE" >
+            </div>
+            <button type="button" (click)="updateFournisseur()" class="btn btn-success" data-bs-dismiss="modal">Modifier</button>
+        <button type="button" (click)="refresh()" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
